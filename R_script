@@ -1,0 +1,51 @@
+# [1] Create dataframe from vector
+
+id <- 1:5
+customer_names <- c("Taeyeon", "Jessica", "Tiffany", "Sunny", "Sooyoung")
+customer_ages <- c(24, 25, 26, 27, 25)
+customer_country <- c("Korea", "USA", "Hong Kong", "China", "Japan")
+
+df <-data.frame(id, customer_names, customer_ages, customer_country)
+View(df)
+
+
+# [2] create a dataframe from list
+
+list_data <- list(id, customer_names, customer_ages, customer_country)
+
+df <- data.frame(list_data)
+View(df)
+
+# [3] load csv data from web
+url <- "https://gist.githubusercontent.com/theetee/f7e8dbc820bb81536a2a60f167554ce1/raw/b22034bb70714d8a1e9cf122842fc5af56420c32/dataframe.csv"
+df <- read.csv(url)
+View(df)
+
+# [4] Load data from Excel
+# install.packages("readxl")
+
+library(readxl)
+sheet1 <- read_excel("test_2.xlsx", sheet= "total")
+View(sheet1)
+
+# [5]Load data from SQL database
+# install.packages("RSQLite")
+library(RSQLite)
+
+# create connection
+conn <- dbConnect(SQLite(), "chinook.db")
+
+# get data from tables
+emp <- dbGetQuery(conn, "select * from customers")
+View(emp)
+
+# disconnect from database
+dbDisconnect(conn)
+
+# [6]Summarize DataFrame
+
+df <- mtcars
+head(df)
+tail(df)
+str(df)
+summary(df)
